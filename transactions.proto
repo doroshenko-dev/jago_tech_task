@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+message Transaction {
+    string transaction_id = 1;
+    string account_number = 2;
+    string transaction_reference = 3;
+    google.protobuf.Timestamp transaction_datetime = 4;
+    double amount = 5;
+}
