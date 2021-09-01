@@ -22,8 +22,9 @@ object Consumer extends App {
   props.put("schema.registry.url", sys.env("SCHEMA_REGISTRY_URL"))
   props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest")
 
-  val executorService = Executors.newFixedThreadPool(3)
-  for (consumerId <- 0 until sys.env("CONSUMERS_NUM").toInt) {
+  val consumersNum = sys.env("CONSUMERS_NUM").toInt
+  val executorService = Executors.newFixedThreadPool(consumersNum)
+  for (consumerId <- 0 until consumersNum) {
     executorService.execute(() => startConsumer(consumerId))
   }
 
